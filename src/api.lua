@@ -51,7 +51,12 @@ function temp_password.is_using_temporary_password(name)
     end
 
     local entry = minetest.get_auth_handler().get_auth(name)
-    return minetest.check_password_entry(name, entry.password, temp)
+    local result = minetest.check_password_entry(name, entry.password, temp)
+    if not result then
+        -- Garbage collection
+        modstorage:set_string("passwd_" .. name, "")
+    end
+    return result
 end
 
 function temp_password.set_new_password(name, passwd)

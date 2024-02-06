@@ -45,8 +45,14 @@ end
 
 minetest.register_chatcommand("temp_password", {
     description = S("Assign temporary password to an account"),
+    param = S("<username>"),
     privs = privs,
     func = function(name, param)
+        param = string.gsub(param, "%s+", "")
+
+        if param == "" then
+            return false, S("Username can't be empty.")
+        end
         local length = tonumber(minetest.settings:get("temp_password.length")) or 12
         local passwd = temp_password.give_temporary_password(param, length)
 
