@@ -1,0 +1,20 @@
+# textdomain: temp_password
+
+##[ src/cmd.lua ]##
+Temporary Password Generated=
+OK=
+Assign temporary password to an account=
+Please give the following information to the player:=
+
+##[ src/gui.lua ]##
+You are using a temporary password to log in. Please change it to activate your account.=
+Please change your password=
+New Password:=
+Confirm Password:=
+Quit=
+Confirm=
+Password changing rejected.=
+Password mismatch.=
+Password must not be blank.=
+Password changed. Enjoy!=
+Password changing timed out.=
