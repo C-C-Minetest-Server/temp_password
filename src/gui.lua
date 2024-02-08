@@ -19,6 +19,8 @@
     USA
 ]]
 
+local modstorage = temp_password.private.modstorage
+
 local C = minetest.colorize
 local F = minetest.formspec_escape
 local S = minetest.get_translator("temp_password")
@@ -100,6 +102,11 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     local passwd = fields.pwd
     if passwd == "" then
         temp_password.show_formspec(name, CR(S("Password must not be blank.")))
+        return
+    end
+
+    if passwd == modstorage:get_string("passwd_" .. name) then
+        temp_password.show_formspec(name, CR(S("Password must not be the same as before.")))
         return
     end
 

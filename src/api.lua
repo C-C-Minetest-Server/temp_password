@@ -45,12 +45,18 @@ function temp_password.give_temporary_password(name, length)
 end
 
 function temp_password.is_using_temporary_password(name)
+    local default_password = minetest.settings:get("default_password")
+    local entry = minetest.get_auth_handler().get_auth(name)
+    if minetest.check_password_entry(name, entry.password, default_password) then
+        modstorage:set_string("passwd_" .. name, default_password)
+        return true
+    end
+
     local temp = modstorage:get_string("passwd_" .. name)
     if temp == "" then
         return false
     end
 
-    local entry = minetest.get_auth_handler().get_auth(name)
     local result = minetest.check_password_entry(name, entry.password, temp)
     if not result then
         -- Garbage collection

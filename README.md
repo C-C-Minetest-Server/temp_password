@@ -5,3 +5,5 @@ This mod handles temporary passwords; players logging in with a temporary passwo
 After creating a temporary account, information will be shown to the operator for them to send to the player via other means, e.g. instant messaging apps. If the player is online (i.e. not issuing the command via IRC or Discord relay), a GUI is also shown with that information for easier copying.
 
 Note that the temporary passwords are sent in plain text. If that is a concern, do not use this mod, and do password changes via a secure method (e.g. SSH with specialized mods).
+
+In addition to temporary passwords, default passwords (set by `default_password` and handled by the engine) are also treated as temporary passwords. Therefore, users logging in with that password must change their password after logging in.
