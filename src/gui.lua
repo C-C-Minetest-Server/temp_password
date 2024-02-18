@@ -74,7 +74,7 @@ minetest.register_on_joinplayer(function(player)
     if temp_password.is_using_temporary_password(name) then
         minetest.log("action",
             "[temp_password] Player " .. name .. " was detected using temporary password, showing form.")
-        minetest.after(0, temp_password.show_formspec, name)
+        minetest.after(0.2, temp_password.show_formspec, name)
     end
 end)
 
@@ -95,17 +95,23 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     end
 
     if fields.pwd ~= fields.conf then
+        minetest.log("action",
+            "[temp_password] " .. name .. " attempted to change their password, but the passwords mismatched.")
         temp_password.show_formspec(name, CR(S("Password mismatch.")))
         return
     end
 
     local passwd = fields.pwd
     if passwd == "" then
+        minetest.log("action",
+            "[temp_password] " .. name .. " attempted to change their password, but the password is blank.")
         temp_password.show_formspec(name, CR(S("Password must not be blank.")))
         return
     end
 
     if passwd == modstorage:get_string("passwd_" .. name) then
+        minetest.log("action",
+            "[temp_password] " .. name .. " attempted to change their password, but the password is the same as before.")
         temp_password.show_formspec(name, CR(S("Password must not be the same as before.")))
         return
     end
