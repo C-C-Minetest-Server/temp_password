@@ -1,0 +1,2 @@
+# Seconds before a player would be kicked if they do not respond to the password changing form.
+temp_password.timeout (Timeout of password changing) int 120
