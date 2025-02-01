@@ -119,6 +119,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     minetest.log("action",
             "[temp_password] Player " .. name .. " changed their password via temp_password:reset_form.")
     temp_password.set_new_password(name, passwd)
+    temp_password.doing_reset[name] = nil
     minetest.close_formspec(name, "temp_password:reset_form")
     minetest.chat_send_player(name, S("Password changed. Enjoy!"))
 end)
